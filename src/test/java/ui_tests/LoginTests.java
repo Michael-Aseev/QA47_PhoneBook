@@ -37,5 +37,20 @@ public class LoginTests extends ApplicationManager {
 
 
     }
+
+    @Test
+    public void loginNegativeTests_wrongEmail(){
+        User user = new User("studiesaseevgmail.com", "Ecbdn300396$");
+        HomePage homePage = new HomePage(getDriver());
+        homePage.clickBtnLoginHeader();
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.typeLoginFrom(user);
+        loginPage.CloseAlert();
+        Assert.assertTrue(loginPage.isErrorMessagePresent("Login Failed with code 401"));
+
+
+
+    }
+
 }
 
