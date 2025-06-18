@@ -18,7 +18,7 @@ public class LoginTests extends ApplicationManager {
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.typeLoginFrom(user);
+        loginPage.typeLoginForm(user);
         ContactsPage contactsPage = new ContactsPage(getDriver());
         Assert.assertTrue(contactsPage.isContactsPresent());
         //System.out.println("after assert");
@@ -30,8 +30,8 @@ public class LoginTests extends ApplicationManager {
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.typeLoginFrom(user);
-        loginPage.CloseAlert();
+        loginPage.typeLoginForm(user);
+        loginPage.closeAlert();
         Assert.assertTrue(loginPage.isErrorMessagePresent("Login Failed with code 401"));
 
 
@@ -44,8 +44,8 @@ public class LoginTests extends ApplicationManager {
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.typeLoginFrom(user);
-        loginPage.CloseAlert();
+        loginPage.typeLoginForm(user);
+        loginPage.closeAlert();
         Assert.assertTrue(loginPage.isErrorMessagePresent("Login Failed with code 401"));
 
 

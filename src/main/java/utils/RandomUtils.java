@@ -24,6 +24,17 @@ public class RandomUtils {
         return new String(randomString);
     }
 
+    public static String generatePhone(int length){
+        String characters = "0123456789";
+        char[] randomString = new char[length];
+        int index = 0;
+        for (int i = 0; i < length; i++) {
+            index = random.nextInt(characters.length());   //2 == c
+            randomString[i] = characters.charAt(index);  //[0] - [c]
+        }
+        return new String(randomString);
+    }
+
     public static String generateEmail(int length){
         String [] domains = {"@mail.com", "@yahoo.com", "@gmail.com", "@example.com"};
         String domain = domains [random.nextInt(domains.length)];
