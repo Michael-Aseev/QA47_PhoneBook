@@ -1,5 +1,6 @@
 package pages;
 
+import dto.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,5 +43,16 @@ public class ContactsPage extends BasePage{
                 return true;
         }
         return false;
+    }
+
+    public String getPhoneFromList(){
+        if (!contactsList.isEmpty()){
+            System.out.println(contactsList.get(0).getText());
+            //u2l4s\nMore actions
+            //0569356856  split("\n") --> [u2l4s]  [0569356856]  --> [1]
+            return contactsList.get(0).getText().split("\n")[1];
+        }
+        System.out.println("contact list empty");
+        return null;
     }
 }

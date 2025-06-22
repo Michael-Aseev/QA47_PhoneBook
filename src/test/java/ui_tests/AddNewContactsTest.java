@@ -21,6 +21,7 @@ public class AddNewContactsTest extends ApplicationManager {
     ContactsPage contactsPage;
     AddPage addPage;
     int sizeBeforeAdd;
+    String existPhone;
 
 
 @BeforeMethod
@@ -31,6 +32,7 @@ public void login(){
     loginPage.typeLoginForm(user);
     contactsPage = new ContactsPage(getDriver());
     sizeBeforeAdd = contactsPage.getContactsListSize();
+    existPhone = contactsPage.getPhoneFromList();
     addPage = clickButtonHeader(HeaderMenuItem.ADD);
 }
 
@@ -78,6 +80,77 @@ public void addNewContactPositiveTest(){
         addPage.typeAddNewContactFrom(contact);
         Assert.assertTrue(contactsPage.validateContactNamePhone(contact.getName(),
                 contact.getPhone()));
+    }
+    @Test(invocationCount = 1)
+    public void addNewContactNegativeTest_emptyName() {
+        Contact contact = Contact.builder()
+                .name("")
+                .lastName(generateString(10))
+                .phone("0123456789")
+                .email(generateEmail(10))
+                .address("Haifa " + generateString(10))
+                .description("desc " + generateString(15))
+                .build();
+        addPage.typeAddNewContactFrom(contact);
+        Assert.assertTrue(addPage.validateURL("add"));
+    }
+
+    @Test(invocationCount = 1)
+    public void addNewContactNegativeTest_emptyLast() {
+        Contact contact = Contact.builder()
+                .name(generateString(10))
+                .lastName("")
+                .phone("0123456789")
+                .email(generateEmail(10))
+                .address("Haifa " + generateString(10))
+                .description("desc " + generateString(15))
+                .build();
+        addPage.typeAddNewContactFrom(contact);
+        Assert.assertTrue(addPage.isUrlNotContains("contacts"));
+    }
+
+    @Test(invocationCount = 1)
+    public void addNewContactNegativeTest_emptyPhone() {
+        Contact contact = Contact.builder()
+                .name(generateString(10))
+                .lastName(generateString(10))
+                .email(generateEmail(10))
+                .phone("")
+                .address("Haifa " + generateString(10))
+                .description("desc " + generateString(15))
+                .build();
+        addPage.typeAddNewContactFrom(contact);
+        //Assert.assertEquals(" Phone not valid: Phone number must contain only digits! And length min 10, max 15!",
+        //addPage.closeAlertReturnText());
+        Assert.assertTrue(addPage.closeAlertReturnText().contains("Phone number must contain only digits!"));
+    }
+
+    @Test(invocationCount = 1)
+    public void addNewContactNegativeTest_emptyEmail() {
+        Contact contact = Contact.builder()
+                .name(generateString(10))
+                .lastName(generateString(10))
+                .phone("0123456789")
+                .email("")
+                .address("Haifa " + generateString(10))
+                .description("desc " + generateString(15))
+                .build();
+        addPage.typeAddNewContactFrom(contact);
+        Assert.assertTrue(addPage.isUrlNotContains("contacts"));
+    }
+
+    @Test(invocationCount = 1)
+    public void addNewContactNegativeTest_existPhone() {
+        Contact contact = Contact.builder()
+                .name(generateString(10))
+                .lastName(generateString(10))
+                .phone(existPhone)
+                .email(generateEmail(10))
+                .address("Haifa " + generateString(10))
+                .description("desc " + generateString(15))
+                .build();
+        addPage.typeAddNewContactFrom(contact);
+        Assert.assertTrue(addPage.isUrlNotContains("contacts"));
     }
 
 }
