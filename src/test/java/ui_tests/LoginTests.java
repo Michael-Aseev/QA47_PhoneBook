@@ -10,11 +10,15 @@ import pages.ContactsPage;
 import pages.HomePage;
 import pages.LoginPage;
 
+import java.lang.reflect.Method;
+
 public class LoginTests extends ApplicationManager {
 
     @Test
-    public void loginPositiveTests(){
+    public void loginPositiveTests(Method method){
+        logger.info("Start method " + method.getName());
         User user = new User("studiesaseev@gmail.com", "Ecbdn300396$");
+        logger.info("test data --> " + user.toString());
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
