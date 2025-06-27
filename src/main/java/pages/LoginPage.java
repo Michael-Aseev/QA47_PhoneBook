@@ -13,7 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class LoginPage extends BasePage {
-    public LoginPage(WebDriver driver){
+
+    public LoginPage(WebDriver driver) {
         setDriver(driver);
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
@@ -39,11 +40,11 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//button[text()='Sign Out']")
     WebElement btnSignOutHeader;
 
-    public void logOut(){
+    public void logOut() {
         btnSignOutHeader.click();
     }
 
-    public void typeLoginForm(User user){
+    public void typeLoginForm(User user) {
         logger.info("type login form with data " + user.toString());
         inputEmail.sendKeys(user.getUsername());
         inputPassword.sendKeys(user.getPassword());
@@ -51,13 +52,14 @@ public class LoginPage extends BasePage {
         btnLoginForm.click();
     }
 
-    public void closeAlert(){
+    public void closeAlert() {
         Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.alertIsPresent());
         System.out.println(alert.getText());
         alert.accept();
     }
-    public String closeAlertReturnText(){
+
+    public String closeAlertReturnText() {
         Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.alertIsPresent());
         String text = alert.getText();
@@ -65,11 +67,11 @@ public class LoginPage extends BasePage {
         return text;
     }
 
-    public boolean isErrorMessagePresent(String message){
+    public boolean isErrorMessagePresent(String message) {
         return isTextInElementPresent(errorMessageLogin, message);
     }
 
-    public boolean isNoContactMessagePresent(String message){
+    public boolean isNoContactMessagePresent(String message) {
         return isTextInElementPresent(messageNoContacts, message);
     }
 

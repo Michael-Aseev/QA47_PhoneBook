@@ -35,7 +35,7 @@ public class AddPage extends BasePage {
     @FindBy(xpath = "//b/..")
     WebElement btnSave;
 
-    public void typeAddNewContactFrom(Contact contact){
+    public void typeAddNewContactFrom(Contact contact) {
         inputName.sendKeys(contact.getName());
         inputLastName.sendKeys(contact.getLastName());
         inputPhone.sendKeys(contact.getPhone());
@@ -45,8 +45,8 @@ public class AddPage extends BasePage {
         btnSave.click();
     }
 
-    public String closeAlertReturnText(){
-        Alert alert = new WebDriverWait(driver,Duration.ofSeconds(5)).until(ExpectedConditions.alertIsPresent());
+    public String closeAlertReturnText() {
+        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.alertIsPresent());
         String text = alert.getText();
         alert.accept();
         return text;

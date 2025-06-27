@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
         setDriver(driver);
@@ -17,7 +17,7 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//a[@href='/login']")
     WebElement btnLoginHeader;
 
-    public void clickBtnLoginHeader(){
+    public void clickBtnLoginHeader() {
         btnLoginHeader.click();
     }
 

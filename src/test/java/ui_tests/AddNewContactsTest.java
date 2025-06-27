@@ -24,33 +24,33 @@ public class AddNewContactsTest extends ApplicationManager {
     String existPhone;
 
 
-@BeforeMethod
-public void login(){
-    User user = new User("mamon300396@gmail.com", "Ercbdn300396$");
-    homePage = new HomePage(getDriver());
-    loginPage = clickButtonHeader(HeaderMenuItem.LOGIN);
-    loginPage.typeLoginForm(user);
-    contactsPage = new ContactsPage(getDriver());
-    sizeBeforeAdd = contactsPage.getContactsListSize();
-    existPhone = contactsPage.getPhoneFromList();
-    addPage = clickButtonHeader(HeaderMenuItem.ADD);
-}
+    @BeforeMethod
+    public void login() {
+        User user = new User("mamon300396@gmail.com", "Ercbdn300396$");
+        homePage = new HomePage(getDriver());
+        loginPage = clickButtonHeader(HeaderMenuItem.LOGIN);
+        loginPage.typeLoginForm(user);
+        contactsPage = new ContactsPage(getDriver());
+        sizeBeforeAdd = contactsPage.getContactsListSize();
+        existPhone = contactsPage.getPhoneFromList();
+        addPage = clickButtonHeader(HeaderMenuItem.ADD);
+    }
 
-@Test(invocationCount = 1)
-public void addNewContactPositiveTest(){
-    Contact contact = Contact.builder()
-            .name(generateString(5))
-            .lastName(generateString(10))
-            .phone("0123456789")
-            .email(generateEmail(10))
-            .address("Haifa " + generateString(10))
-            .description("desc " + generateString(15))
-            .build();
-    addPage.typeAddNewContactFrom(contact);
-    int sizeAfterAdd = contactsPage.getContactsListSize();
-    System.out.println(sizeBeforeAdd + "X" + sizeAfterAdd);
-    Assert.assertEquals(sizeBeforeAdd +1, sizeAfterAdd);
-}
+    @Test(invocationCount = 1)
+    public void addNewContactPositiveTest() {
+        Contact contact = Contact.builder()
+                .name(generateString(5))
+                .lastName(generateString(10))
+                .phone("0123456789")
+                .email(generateEmail(10))
+                .address("Haifa " + generateString(10))
+                .description("desc " + generateString(15))
+                .build();
+        addPage.typeAddNewContactFrom(contact);
+        int sizeAfterAdd = contactsPage.getContactsListSize();
+        System.out.println(sizeBeforeAdd + "X" + sizeAfterAdd);
+        Assert.assertEquals(sizeBeforeAdd + 1, sizeAfterAdd);
+    }
 
     @Test(invocationCount = 1)
     public void addNewContactPositiveTest_useFindElements() {
@@ -65,12 +65,13 @@ public void addNewContactPositiveTest(){
         addPage.typeAddNewContactFrom(contact);
         int sizeAfterAdd = contactsPage.getContactsListSizeUseFindElement();
         System.out.println(sizeBeforeAdd + "X" + sizeAfterAdd);
-        Assert.assertEquals(sizeBeforeAdd +1, sizeAfterAdd);
+        Assert.assertEquals(sizeBeforeAdd + 1, sizeAfterAdd);
     }
+
     @Test
     public void addNewContactPositiveTest_validateContactNamePhone() {
         Contact contact = Contact.builder()
-                .name("Name-"+generateString(8))
+                .name("Name-" + generateString(8))
                 .lastName(generateString(10))
                 .phone(generatePhone(10))
                 .email(generateEmail(10))
@@ -81,6 +82,7 @@ public void addNewContactPositiveTest(){
         Assert.assertTrue(contactsPage.validateContactNamePhone(contact.getName(),
                 contact.getPhone()));
     }
+
     @Test(invocationCount = 1)
     public void addNewContactNegativeTest_emptyName() {
         Contact contact = Contact.builder()

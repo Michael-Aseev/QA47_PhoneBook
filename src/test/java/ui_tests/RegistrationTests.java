@@ -1,6 +1,5 @@
 package ui_tests;
 
-
 import dto.User;
 import manager.ApplicationManager;
 import org.testng.Assert;
@@ -16,7 +15,7 @@ public class RegistrationTests extends ApplicationManager {
     LoginPage loginPage;
 
     @BeforeMethod
-    public void goToRegistrationPage(){
+    public void goToRegistrationPage() {
         homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
         loginPage = new LoginPage(getDriver());
@@ -24,28 +23,28 @@ public class RegistrationTests extends ApplicationManager {
     //      BeforeMethod(App)   BeforeMethod(Reg)  Test  AfterMethod(App)
 
     @Test
-    public void registrationPositiveTest(){
+    public void registrationPositiveTest() {
         User user = new User(generateEmail(10), "Password123!");
         loginPage.typeRegistrationForm(user);
         Assert.assertTrue(loginPage.isNoContactMessagePresent("Add new by clicking on Add in NavBar!"));
     }
 
     @Test
-    public void registrationNegativeTest_duplicateUser(){
+    public void registrationNegativeTest_duplicateUser() {
         User user = new User(generateEmail(10), "Password123!");
         loginPage.typeRegistrationForm(user);
-        if(loginPage.isNoContactMessagePresent("Add new by clicking on Add in NavBar!")){
+        if (loginPage.isNoContactMessagePresent("Add new by clicking on Add in NavBar!")) {
             loginPage.logOut();
             loginPage.typeRegistrationForm(user);
             Assert.assertTrue(loginPage.closeAlertReturnText()
                     .contains("User already exist"));
-        }else {
+        } else {
             Assert.fail("wrong registration with user " + user.toString());
         }
     }
 
     @Test
-    public void registrationNegativeTest_wrongPassword(){
+    public void registrationNegativeTest_wrongPassword() {
         User user = new User(generateEmail(10), "Password123");
         loginPage.typeRegistrationForm(user);
         Assert.assertTrue(loginPage.closeAlertReturnText()

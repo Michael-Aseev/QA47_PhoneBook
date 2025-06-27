@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 public class LoginTests extends ApplicationManager {
 
     @Test
-    public void loginPositiveTests(Method method){
+    public void loginPositiveTests(Method method) {
         logger.info("Start method " + method.getName());
         User user = new User("studiesaseev@gmail.com", "Ecbdn300396$");
         logger.info("test data --> " + user.toString());
@@ -29,7 +29,7 @@ public class LoginTests extends ApplicationManager {
     }
 
     @Test
-    public void loginNegativeTests_wrongPassword(){
+    public void loginNegativeTests_wrongPassword() {
         User user = new User("studiesaseev@gmail.com", "Ecbdn300396kkll");
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
@@ -37,13 +37,10 @@ public class LoginTests extends ApplicationManager {
         loginPage.typeLoginForm(user);
         loginPage.closeAlert();
         Assert.assertTrue(loginPage.isErrorMessagePresent("Login Failed with code 401"));
-
-
-
     }
 
     @Test
-    public void loginNegativeTests_wrongEmail(){
+    public void loginNegativeTests_wrongEmail() {
         User user = new User("studiesaseevgmail.com", "Ecbdn300396$");
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
@@ -51,9 +48,6 @@ public class LoginTests extends ApplicationManager {
         loginPage.typeLoginForm(user);
         loginPage.closeAlert();
         Assert.assertTrue(loginPage.isErrorMessagePresent("Login Failed with code 401"));
-
-
-
     }
 
 }
