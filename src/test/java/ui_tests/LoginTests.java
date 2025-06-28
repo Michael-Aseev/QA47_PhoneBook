@@ -5,12 +5,15 @@ import manager.ApplicationManager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.ContactsPage;
 import pages.HomePage;
 import pages.LoginPage;
+import utils.TestNGListener;
 
 import java.lang.reflect.Method;
+@Listeners(TestNGListener.class)
 
 public class LoginTests extends ApplicationManager {
 
