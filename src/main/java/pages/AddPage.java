@@ -46,7 +46,8 @@ public class AddPage extends BasePage {
     }
 
     public String closeAlertReturnText() {
-        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.alertIsPresent());
+        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.alertIsPresent());
         String text = alert.getText();
         alert.accept();
         return text;
