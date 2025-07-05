@@ -57,11 +57,11 @@ public class AddNewContactsTest extends ApplicationManager {
         addPage.typeAddNewContactFrom(contact);
         int sizeAfterAdd = contactsPage.getContactsListSize();
         System.out.println(sizeAfterAdd + "X" + sizeAfterAdd);
-        Assert.assertEquals(sizeAfterAdd +1, sizeAfterAdd);
+        Assert.assertEquals(sizeBeforeAdd +1, sizeAfterAdd);
     }
 
     @Test(dataProvider = "dataProviderContactsFile", dataProviderClass = ContactDP.class)
-    public void addNewContactPositiveTest(Contact contact) {
+    public void addNewContactPositiveTestDP(Contact contact) {
         addPage.typeAddNewContactFrom(contact);
         int sizeAfterAdd = contactsPage.getContactsListSize();
         System.out.println(sizeBeforeAdd + "X" + sizeAfterAdd);
