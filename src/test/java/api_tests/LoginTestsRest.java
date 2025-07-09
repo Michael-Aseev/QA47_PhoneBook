@@ -15,7 +15,7 @@ public class LoginTestsRest extends AuthenticationController implements BaseAPI 
 
     SoftAssert softAssert = new SoftAssert();
 
-    @Test
+    @Test(groups = "smoke")
     public void loginPositiveTest() {
         User user = new User("qa_mail@mail.com", "Qwerty123!");
         Response response = requestRegLogin(user, LOGIN_URL);

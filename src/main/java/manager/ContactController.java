@@ -17,7 +17,7 @@ public class ContactController implements BaseAPI {
 
     protected TokenDto tokenDto;
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void login(){
         User user = new User(getProperty("login.properties", "email"),
                 getProperty("login.properties", "password"));
@@ -52,5 +52,31 @@ public class ContactController implements BaseAPI {
                 .thenReturn()
                 ;
     }
+
+    protected Response updateContactRequest(Contact contact, TokenDto tokenDto){
+        return  given()
+                .log().all() //body, headers,  cookies, status
+                .body(contact)
+                .baseUri(getProperty("login.properties", "baseUri"))
+                .contentType(ContentType.JSON)// Content-type : App/json
+                .accept(ContentType.JSON)
+                .header("Authorization", tokenDto.getToken())
+                .put(ADD_NEW_CONTACT_URL)
+                .thenReturn()
+                ;
+
+    }
+
+    protected Response deleteContactsById(Contact contact, TokenDto tokenDto){
+        return given()
+                .log().all()
+                .baseUri(getProperty("login.properties", "baseUri"))
+                .accept(ContentType.JSON)
+                .header("Authorization", tokenDto.getToken())
+                .delete(ADD_NEW_CONTACT_URL+"/"+contact.getId())
+                .thenReturn()
+                ;
+    }
+
 
 }

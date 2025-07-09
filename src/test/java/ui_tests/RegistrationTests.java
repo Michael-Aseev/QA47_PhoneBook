@@ -18,7 +18,7 @@ public class RegistrationTests extends ApplicationManager {
     HomePage homePage;
     LoginPage loginPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage() {
         homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
@@ -26,7 +26,7 @@ public class RegistrationTests extends ApplicationManager {
     }
     //      BeforeMethod(App)   BeforeMethod(Reg)  Test  AfterMethod(App)
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test( groups = "smoke")//retryAnalyzer = RetryAnalyzer.class,
     public void registrationPositiveTest() {
         User user = new User(generateEmail(10), "Password123!");
         loginPage.typeRegistrationForm(user);

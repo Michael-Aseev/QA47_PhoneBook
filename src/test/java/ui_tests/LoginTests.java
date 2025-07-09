@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 
 public class LoginTests extends ApplicationManager {
 
-    @Test
+    @Test(groups = "smoke")
     public void loginPositiveTests(Method method) {
         logger.info("Start method " + method.getName());
         User user = new User("studiesaseev@gmail.com", "Ecbdn300396$");
