@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 import utils.BaseAPI;
 
 import static io.restassured.RestAssured.given;
+import static utils.PropertiesReader.*;
 
 public class AuthenticationController implements BaseAPI {
 
@@ -22,10 +23,12 @@ public class AuthenticationController implements BaseAPI {
 
     public Response requestRegLogin(User user, String url) {
         return given()
-                .contentType(ContentType.JSON)   // Content-type : App/json
+                .baseUri(getProperty("login.properties", "baseUri"))
+                .contentType(ContentType.JSON)// Content-type : App/json
+                .accept(ContentType.JSON)
                 .body(user)
                 .when()
-                .post(BASE_URL + url)
+                .post(url)
                 .thenReturn()
                 ;
 
